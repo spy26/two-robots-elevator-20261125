@@ -33,6 +33,8 @@ def validate_entry(text: str) -> None:
         raise fail("entry must be a single line")
     if "  " in text:
         raise fail("entry contains a double space")
+    if any(ord(char) < 32 for char in text):
+        raise fail("entry contains a control character")
 
 
 def write_and_verify(file_path: Path, expected: bytes) -> None:
